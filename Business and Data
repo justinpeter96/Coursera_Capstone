@@ -33,3 +33,33 @@ We shall keep track of the searches by the users and since the topic of this cap
 compare the hotels of one neighbourhood to other neighbourhoods.For our own interest we shall use the ratings, number of tips, 
 number of likes of the hotels to cluster the hotels in a certain neighbourhood. We shall then try to identify those clusters 
 and after creating clusters in different neighbourhoods. We shall be able to compare hotels in different neighbourhoods.
+
+Methodology
+
+The workflow of the project starts with the web scraping and data wrangling. Using the Beautiful Soup library, the postal code 
+and the neighborhood is processed to derive the latitude and longitude of the neighborhoods we want. With the folium Map, the 
+latitude and longitude of the neighborhoods provides the choropleth visualization.Folium- Python visualization library would be
+used to visualize the neighborhoods cluster distribution of cities over an interactive leaflet map. Extensive comparative
+analysis of two randomly picked neighborhoods world be carried out to derive the desirable insights from the outcomes using 
+python’s scientific libraries Pandas, NumPy and Scikit-learn. Unsupervised machine learning algorithm K-mean clustering would 
+be applied to form the clusters of different categories of places residing in and around the neighborhoods. These clusters 
+from each of those two chosen neighborhoods would be analyzed individually collectively and comparatively to derive the 
+conclusions.Now, the choice is what is the best to choose from and what will we get.
+
+Results
+
+Using the graphs and the folium map, we were able to make what was necessary to figure out what stands out. We cluster our 
+distribution of cities to see that when the neighborhoods are closer, results skyrocket out of the place. Which neighborhood is 
+the best? That's all based on the variety of factors we determined while observing the dataset. 
+
+Discussion
+
+This project is beneficial in many terms, it will save the users time and money. Many a times, people when moved to the new 
+place, they used to worry for settling down. This project recommend the better places in a very less time. This is a far better
+approach for users to figure out what works best.
+
+Conclusion:
+This Analysis concludes that the two neighborhoods have great values such as locality and uniqueness, but out of these two 
+the second set of neighborhoods has better prospects for buying houses or choose for rental houses.This set has higher 
+value based on the fact that it trumps in all factors all over the other. This means how good it is, what it offers, the location, 
+and the population, not also forgetting education in the fact that nearby schools in this neighborhood is much better.
