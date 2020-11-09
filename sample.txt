@@ -1,0 +1,190 @@
+import pandas as pd
+import urllib.request
+import requests as requests
+from bs4 import BeautifulSoup
+firstUrl = 'http://py4e-data.dr-chuck.net/comments_42.html'
+secondUrl = 'http://py4e-data.dr-chuck.net/comments_1019737.html'
+firstpage = urllib.request.urlopen(firstUrl).read()
+secondpage = urllib.request.urlopen(secondUrl).read()
+firstsoup = BeautifulSoup(firstpage,'html.parser')
+secondsoup = BeautifulSoup(secondpage,'html.parser')
+container = firstsoup.find_all(class_="comments")
+container2 = secondsoup.find_all(class_="comments")
+adding = []
+adding2 = []
+for i in container:
+	b = i.text
+	adding.append(b)
+for i in container2:
+	c = i.text
+	adding2.append(c)
+adding3 = {'adding':adding,'adding2':adding2}
+adding4 = pd.DataFrame(adding3)
+adding5 = adding4[['adding','adding2']].astype(int)
+for i in adding5.columns:
+	print(adding5[i].sum())
+
+fname = input("Enter file name: ")
+fh = open(fname)
+numbers = []
+for line in fh:
+    if not line.startswith("X-DSPAM-Confidence:") : 
+    	continue
+    number = float(line[20:27])
+    numbers.append(number)
+
+total = 0
+for ele in range(0, len(numbers)): 
+    total = total + numbers[ele]
+    average = total / len(numbers) 
+  
+print("Average spam confidence: ", average)
+
+numlist =list()
+while True:
+	inp = input('Enter a number: ')
+	if inp == 'done':
+		break
+	value = float(inp)
+	numlist.append(value)
+
+average = sum(numlist)/len(numlist)
+print('Average is:', average)
+
+fname = input("Enter file name: ")
+fh = open(fname)
+lst = list()
+for line in fh:
+	words = line.split()
+	for word in words:
+		if word not in lst:
+			lst.append(word)
+		elif word in lst:
+			continue
+
+lst.sort()
+print(lst)
+
+fname = input("Enter file name: ")
+fh = open(fname)
+count = 0
+for line in fh:
+	if not line.startswith("From "):
+		continue
+	words = line.split()
+	print(words[1])
+	count += 1
+print("There were", count, "lines in the file with From as the first word")
+
+import pandas as pd
+class Classmate:
+	def __init__(self,name,language,grade):
+		self.name = name
+		self.language = language
+		self.grade = grade
+
+person1 = Classmate('Justin','Spanish', 100)
+person2 = Classmate('Mary','French',90)
+person3 = Classmate('George','Portuguese',95)
+
+nombre = []
+lengua = []
+grado = []
+for i in person1,person2,person3:
+	a = i.name
+	b = i.language
+	c = i.grade
+	nombre.append(a)
+	lengua.append(b)
+	grado.append(c)
+
+data = { 'name':nombre, 'language':lengua , 'grade':grado }
+data2 = pd.DataFrame.from_dict(data)
+print(data2['grade'].describe())
+
+class Question:
+     def __init__(self, prompt, answer):
+          self.prompt = prompt
+          self.answer = answer
+
+question_prompts = [
+     "Who is the president now? \n(a) Trump \n(b) Biden",
+     "Who was the president before? \n(a) Trump \n(b) Clinton",
+     "What language is widely spoken after English? \n(a) Mandarin \n(b) Spanish",
+     "What color are grapes? \n(a) Green \n(b) Purple \n(c) Both",
+     "Who is Didac Ribot? \n(a) Vlogger \n(b) Youtuber",
+     "What sport is the most famous around the world? \n(a) Basketball \n(b) Football \n(c) Soccer",
+     "What instrument uses keys? \n(a) Guitar \n(b) Piano",
+     "What school is not an ivy league? \n(a) Harvard \n(b) Colombia \n(c) Dartmouth \n(d) BGSU",
+     "What color are bananas? \n(a) Red \n(b) Yellow",
+     "Which person is consistently known over centuries? \n(a) Jesus \n(b) Socrates",
+]
+
+questions = [
+     Question(question_prompts[0], "a"),
+     Question(question_prompts[1], "a"),
+     Question(question_prompts[2], "b"),
+     Question(question_prompts[3], "c"),
+     Question(question_prompts[4], "b"),
+     Question(question_prompts[5], "c"),
+     Question(question_prompts[6], "b"),
+     Question(question_prompts[7], "d"),
+     Question(question_prompts[8], "b"),
+     Question(question_prompts[9], "a"),
+]
+
+def run_quiz(questions):
+     score = 0
+     count = 0
+     for question in questions:
+          answer = input(question.prompt)
+          if answer == question.answer:
+               score += 1
+          elif answer != question.answer:
+          	   count +=1
+     print("you got", score, "out of", len(questions))
+     print("you have",count,"mistakes")
+     percentage = score/len(questions)
+     print("Your score is:",percentage*100,"percent")
+
+run_quiz(questions)
+
+name = input("Enter file:")
+handle = open(name)
+count = dict()
+for line in handle:
+    word = line.split()
+    if line.startswith('From '):
+        count[word[1]] = count.get(word[1], 0) + 1
+
+number = 0
+email = ''
+for k in count:
+    if count[k] > number:
+        email = k
+        number = count[k]
+print(email, number)
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plot
+from pydataset import data
+exam = data('WorldPhones')
+exam.reset_index(inplace=True)
+year = pd.melt(exam, id_vars='index')
+table = pd.pivot_table(year, values='value', index=['index','variable'])
+li = ['Asia']
+for i in li:
+	a = table[table.index.get_level_values('variable') == i]
+	print(a)
+
+import re
+actual = open("actual.txt")
+something = []
+for line in actual:
+     maybe = re.findall('[0-9]+',line)
+     something += maybe
+total = 0
+for final in something:
+    total += int(final)
+print(total)
